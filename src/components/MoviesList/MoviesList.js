@@ -1,7 +1,35 @@
 import React, { Component } from "react";
+import { MovieItem } from "../MovieItem";
+import { generateID } from "../../utils/constants";
 import "./MoviesList.scss";
 
 export class MoviesList extends Component {
+    renderMoviesList(data) {
+        if (data) {
+            return data.results.map(item => {
+                return (
+                    <MovieItem content={item} key={generateID()}></MovieItem>
+                );
+            });
+        } else {
+            return <div>There are no movies...</div>;
+        }
+    }
+
+    renderTemplate() {
+        const { movies, isFetching } = this.props;
+
+        if (isFetching) {
+            return <p className="loading">Loading...</p>;
+        } else {
+            return (
+                <div className="row movies-row">
+                    {this.renderMoviesList(movies)}
+                </div>
+            );
+        }
+    }
+
     render() {
         return (
             <section className="movies-wrap">
@@ -23,105 +51,7 @@ export class MoviesList extends Component {
                             </button>
                         </form>
                     </div>
-
-                    <div className="row movies-row">
-                        <div className="col-sm movies-item">
-                            <div className="text-center">
-                                <img
-                                    src="images/behind-the-scenes-camera-camera-crew-2429417.jpg"
-                                    alt="camera-thumb"
-                                    className="img-thumbnail movie-thumb"
-                                />
-                            </div>
-                            <h5 className="movie-title">Movie title</h5>
-                            <div className="movie-info">
-                                <ul className="movie-info__genres">
-                                    <li>genre 1</li>
-                                    <li>genre 2</li>
-                                    <li>genre 3</li>
-                                </ul>
-                                <p className="movie-info__description">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.
-                                </p>
-                                <a className="btn btn-success" href="#">
-                                    Link
-                                </a>
-                            </div>
-                        </div>
-                        <div className="col-sm movies-item">
-                            <div className="text-center">
-                                <img
-                                    src="images/behind-the-scenes-camera-camera-crew-2429417.jpg"
-                                    alt="camera-thumb"
-                                    className="img-thumbnail movie-thumb"
-                                />
-                            </div>
-                            <h5 className="movie-title">Movie title</h5>
-                            <div className="movie-info">
-                                <ul className="movie-info__genres">
-                                    <li>genre 1</li>
-                                    <li>genre 2</li>
-                                    <li>genre 3</li>
-                                </ul>
-                                <p className="movie-info__description">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.
-                                </p>
-                                <a className="btn btn-success" href="#">
-                                    Link
-                                </a>
-                            </div>
-                        </div>
-                        <div className="col-sm movies-item">
-                            <div className="text-center">
-                                <img
-                                    src="images/behind-the-scenes-camera-camera-crew-2429417.jpg"
-                                    alt="camera-thumb"
-                                    className="img-thumbnail movie-thumb"
-                                />
-                            </div>
-                            <h5 className="movie-title">Movie title</h5>
-                            <div className="movie-info">
-                                <ul className="movie-info__genres">
-                                    <li>genre 1</li>
-                                    <li>genre 2</li>
-                                    <li>genre 3</li>
-                                </ul>
-                                <p className="movie-info__description">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.
-                                </p>
-                                <a className="btn btn-success" href="#">
-                                    Link
-                                </a>
-                            </div>
-                        </div>{" "}
-                        <div className="col-sm movies-item">
-                            <div className="text-center">
-                                <img
-                                    src="images/behind-the-scenes-camera-camera-crew-2429417.jpg"
-                                    alt="camera-thumb"
-                                    className="img-thumbnail movie-thumb"
-                                />
-                            </div>
-                            <h5 className="movie-title">Movie title</h5>
-                            <div className="movie-info">
-                                <ul className="movie-info__genres">
-                                    <li>genre 1</li>
-                                    <li>genre 2</li>
-                                    <li>genre 3</li>
-                                </ul>
-                                <p className="movie-info__description">
-                                    Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit.
-                                </p>
-                                <a className="btn btn-success" href="#">
-                                    Link
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {this.renderTemplate()}
                 </div>
             </section>
         );

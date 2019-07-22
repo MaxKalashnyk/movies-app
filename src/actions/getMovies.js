@@ -4,7 +4,7 @@ export const REQUEST = "REQUEST";
 export const REQUEST_SUCCESS = "REQUEST_SUCCESS";
 export const REQUEST_FAIL = "REQUEST_FAIL";
 
-export const popularMoviesData = (page = 1) => dispatch => {
+export const getMoviesAction = (page = 1) => dispatch => {
     dispatch({
         type: REQUEST
     });

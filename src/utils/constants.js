@@ -10,3 +10,16 @@ export const detailsMoviesURLString =
     "https://developers.themoviedb.org/3/movies/get-movie-details";
 export const recommendationsMoviesURLString =
     "https://developers.themoviedb.org/3/movies/get-movie-recommendations";
+
+export const imageServerURL = "http://image.tmdb.org/t/p/w500";
+
+export const generateMoviePoster = imagePath => `${imageServerURL}${imagePath}`;
+
+export const generateID = () => {
+    return (
+        "_" +
+        Math.random()
+            .toString(36)
+            .substr(2, 9)
+    );
+};

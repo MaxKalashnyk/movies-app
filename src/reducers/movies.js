@@ -1,15 +1,11 @@
-import {
-    REQUEST,
-    REQUEST_SUCCESS,
-    REQUEST_FAIL
-} from "../actions/popularMovies";
+import { REQUEST, REQUEST_SUCCESS, REQUEST_FAIL } from "../actions/getMovies";
 
 export const initialState = {
-    data: null,
+    moviesData: null,
     isFetching: false
 };
 
-export function popularMoviesReducer(state = initialState, action) {
+export function moviesReducer(state = initialState, action) {
     switch (action.type) {
         case REQUEST:
             return { ...state, isFetching: true };
@@ -17,13 +13,13 @@ export function popularMoviesReducer(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                data: action.payload
+                moviesData: action.payload
             };
         case REQUEST_FAIL:
             return {
                 ...state,
                 isFetching: false,
-                data: null
+                moviesData: null
             };
         default:
             return state;
