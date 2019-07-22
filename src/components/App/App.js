@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { MoviesList } from "../MoviesList";
 import { Header } from "../Header";
 import { getMoviesAction } from "../../actions/getMovies";
+import { getGenresAction } from "../../actions/getGenres";
 import "./App.scss";
 
 export class App extends Component {
     componentDidMount() {
-        const { getMovies } = this.props;
+        const { getMovies, getGenres } = this.props;
         getMovies();
+        getGenres();
     }
 
     render() {
@@ -33,13 +35,15 @@ export class App extends Component {
 const mapStateToProps = store => {
     return {
         page: store.page,
-        movies: store.movies
+        movies: store.movies,
+        genres: store.genres
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getMovies: page => dispatch(getMoviesAction(page))
+        getMovies: page => dispatch(getMoviesAction(page)),
+        getGenres: () => dispatch(getGenresAction())
     };
 };
 

@@ -5,6 +5,7 @@ import "./MoviesList.scss";
 
 export class MoviesList extends Component {
     renderMoviesList(data) {
+        console.log(data);
         if (data) {
             return data.results.map(item => {
                 return (

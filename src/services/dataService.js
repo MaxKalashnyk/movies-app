@@ -24,3 +24,11 @@ export const searchMovies = (page = 1) => {
         .then(response => response.json())
         .catch(error => console.error(error));
 };
+
+export const getGenresList = () => {
+    const urlString = `https://api.themoviedb.org/3/genre/movie/list?api_key=${APIKey}&language=${lang}`;
+
+    return fetch(urlString)
+        .then(response => response.json())
+        .catch(error => console.error(error));
+};

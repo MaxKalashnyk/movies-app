@@ -23,3 +23,6 @@ export const generateID = () => {
             .substr(2, 9)
     );
 };
+
+export const cutString = string =>
+    string.length > 80 ? `${string.substring(0, 76)}...` : string;
