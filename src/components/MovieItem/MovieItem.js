@@ -1,28 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { generateMoviePoster } from "../../utils/constants";
+import { generateID } from "../../utils/constants";
 import { cutString } from "../../utils/constants";
+import "./MovieItem.scss";
 
 export class MovieItem extends Component {
-    constructor(props) {
-        super(props);
-        this.getGenresList = this.getGenresList.bind(this);
+    getGenresList(list) {
+        const { genres } = this.props;
+
+        // console.log(genres.genresData.genres);
+
+        if (genres.genresData) {
+            const filteredList = genres.genresData.genres.filter(function(el) {
+                return list.some(function(f) {
+                    return f === el.id;
+                });
+            });
+            return filteredList;
+        }
     }
 
-    // getGenresList(list) {
-    //     const { genres } = this.props;
-
-    //     console.log(genres.genresData.genres);
-
-    //     if (genres.genresData) {
-    //         const filteredList = genres.genresData.genres.filter(function(el) {
-    //             return list.some(function(f) {
-    //                 return f.id === el.id;
-    //             });
-    //         });
-    //         return filteredList;
-    //     }
-    // }
+    renderGenresList(genresList) {
+        return genresList.map(item => (
+            <span className="genre-item" key={generateID()}>
+                {item.name}
+            </span>
+        ));
+    }
 
     render() {
         const { content } = this.props;
@@ -38,6 +43,8 @@ export class MovieItem extends Component {
             adult
         } = content;
 
+        const getGenresMoviesList = this.getGenresList(genre_ids);
+
         return (
             <div className="col-3 movies-item">
                 <div className="text-center">
@@ -49,11 +56,9 @@ export class MovieItem extends Component {
                 </div>
                 <h5 className="movie-title">{title}</h5>
                 <div className="movie-info">
-                    <ul className="movie-info__genres">
-                        <li>genre 1</li>
-                        <li>genre 2</li>
-                        <li>genre 3</li>
-                    </ul>
+                    <p className="movie-info__genres">
+                        {this.renderGenresList(getGenresMoviesList)}
+                    </p>
                     <p className="movie-info__description">
                         {cutString(overview)}
                     </p>

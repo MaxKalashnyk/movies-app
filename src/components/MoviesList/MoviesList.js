@@ -7,11 +7,9 @@ export class MoviesList extends Component {
     renderMoviesList(data) {
         console.log(data);
         if (data) {
-            return data.results.map(item => {
-                return (
-                    <MovieItem content={item} key={generateID()}></MovieItem>
-                );
-            });
+            return data.results.map(item => (
+                <MovieItem content={item} key={generateID()}></MovieItem>
+            ));
         } else {
             return <div>There are no movies...</div>;
         }

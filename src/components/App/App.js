@@ -9,8 +9,8 @@ import "./App.scss";
 export class App extends Component {
     componentDidMount() {
         const { getMovies, getGenres } = this.props;
-        getMovies();
         getGenres();
+        getMovies();
     }
 
     render() {
