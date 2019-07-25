@@ -9,8 +9,6 @@ export class MovieItem extends Component {
     getGenresList(list) {
         const { genres } = this.props;
 
-        // console.log(genres.genresData.genres);
-
         if (genres.genresData) {
             const filteredList = genres.genresData.genres.filter(function(el) {
                 return list.some(function(f) {
@@ -46,7 +44,7 @@ export class MovieItem extends Component {
         const getGenresMoviesList = this.getGenresList(genre_ids);
 
         return (
-            <div className="col-3 movies-item">
+            <div className="col-lg-3 col-md-6 col-12 movies-item">
                 <div className="text-center">
                     <img
                         src={generateMoviePoster(backdrop_path)}

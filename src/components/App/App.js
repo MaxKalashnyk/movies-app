@@ -7,15 +7,21 @@ import { getGenresAction } from "../../actions/getGenres";
 import "./App.scss";
 
 export class App extends Component {
+    getGenresListAsync() {
+        const { getGenres } = this.props;
+        return new Promise(resolve => {
+            getGenres();
+            resolve(true);
+        }).catch(error => console.error(error));
+    }
+
     componentDidMount() {
-        const { getMovies, getGenres } = this.props;
-        getGenres();
-        getMovies();
+        const { getMovies } = this.props;
+        this.getGenresListAsync().then(getMovies());
     }
 
     render() {
         const { movies, page } = this.props;
-        console.log("movies", movies);
         return (
             <div className="App">
                 <Header></Header>
