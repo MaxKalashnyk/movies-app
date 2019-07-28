@@ -41,7 +41,7 @@ export class MovieItem extends Component {
             adult
         } = content;
 
-        const getGenresMoviesList = this.getGenresList(genre_ids);
+        // const getGenresMoviesList = this.getGenresList(genre_ids);
 
         return (
             <div className="col-lg-3 col-md-6 col-12 movies-item">
@@ -54,9 +54,9 @@ export class MovieItem extends Component {
                 </div>
                 <h5 className="movie-title">{title}</h5>
                 <div className="movie-info">
-                    <p className="movie-info__genres">
+                    {/* <p className="movie-info__genres">
                         {this.renderGenresList(getGenresMoviesList)}
-                    </p>
+                    </p> */}
                     <p className="movie-info__description">
                         {cutString(overview)}
                     </p>
