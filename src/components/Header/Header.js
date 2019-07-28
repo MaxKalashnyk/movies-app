@@ -1,7 +1,27 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import { generateID } from "../../utils/constants";
 import "./Header.scss";
 
 export class Header extends Component {
+    renderNavigationMenuList() {
+        const { routes } = this.props;
+
+        return routes.map(route => (
+            <li className="nav-item" key={generateID()}>
+                <NavLink
+                    exact={route.isExact}
+                    activeClassName="active"
+                    className="nav-link"
+                    to={route.path}
+                >
+                    {route.name}
+                </NavLink>
+            </li>
+        ));
+    }
+
     render() {
         return (
             <header className="App-header">
@@ -26,7 +46,7 @@ export class Header extends Component {
                         id="navbarSupportedContent"
                     >
                         <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
+                            {/* <li className="nav-item active">
                                 <a className="nav-link" href="#">
                                     Home{" "}
                                     <span className="sr-only">(current)</span>
@@ -36,7 +56,9 @@ export class Header extends Component {
                                 <a className="nav-link" href="#">
                                     Link
                                 </a>
-                            </li>
+                            </li> */}
+
+                            {this.renderNavigationMenuList()}
                         </ul>
                     </div>
                 </nav>
@@ -46,3 +68,7 @@ export class Header extends Component {
 }
 
 export default Header;
+
+Header.propTypes = {
+    routes: PropTypes.array
+};

@@ -11,6 +11,7 @@ export const getGenresAction = () => dispatch => {
 
     getGenresList()
         .then(data => {
+            console.log("data", data);
             dispatch({
                 type: REQUEST_SUCCESS1,
                 payload: data

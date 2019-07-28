@@ -13,7 +13,10 @@ export const recommendationsMoviesURLString =
 
 export const imageServerURL = "http://image.tmdb.org/t/p/w500";
 
-export const generateMoviePoster = imagePath => `${imageServerURL}${imagePath}`;
+export const generateMoviePoster = imagePath =>
+    imagePath
+        ? `${imageServerURL}${imagePath}`
+        : "https://via.placeholder.com/255x150?text=Placeholder";
 
 export const generateID = () => {
     return (
