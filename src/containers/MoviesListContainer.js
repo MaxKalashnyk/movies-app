@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { store } from "../store/configureStore";
 import { MoviesList } from "../components/MoviesList";
 import { getMoviesAction } from "../actions/getMovies";
 import { withRouter } from "react-router-dom";
@@ -16,19 +15,10 @@ export class MoviesListContainer extends Component {
     //     }).catch(error => console.error(error));
     // }
 
-    getMoviesData() {
-        store.dispatch(getMoviesAction());
-        console.log("store", store);
-    }
-
     async componentDidMount() {
-        await this.getMoviesData();
+        const { getMovies } = this.props;
 
-        console.log("props", this.props);
-
-        // const { getMovies } = this.props;
-
-        // await getMovies();
+        await getMovies();
 
         // this.getGenresListAsync().then(getMovies());
     }
