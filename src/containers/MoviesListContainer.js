@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { store } from "../store/configureStore";
 import { MoviesList } from "../components/MoviesList";
 import { getMoviesAction } from "../actions/getMovies";
+import { withRouter } from "react-router-dom";
 // import { getGenresAction } from "../actions/getGenres";
 
 export class MoviesListContainer extends Component {
@@ -17,6 +18,7 @@ export class MoviesListContainer extends Component {
 
     getMoviesData() {
         store.dispatch(getMoviesAction());
+        console.log("store", store);
     }
 
     async componentDidMount() {
@@ -65,7 +67,9 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MoviesListContainer);
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(MoviesListContainer)
+);
