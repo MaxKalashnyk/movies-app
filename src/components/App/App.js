@@ -88,7 +88,6 @@ export class App extends Component {
 }
 
 const mapStateToProps = store => {
-    console.log("store", store);
     return {
         page: store.page,
         movies: store.movies,
@@ -97,7 +96,6 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-    console.log(dispatch);
     return {
         getGenres: () => dispatch(getGenresAction()),
         getMovies: page => dispatch(getMoviesAction(page))

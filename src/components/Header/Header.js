@@ -24,7 +24,7 @@ export class Header extends Component {
 
     render() {
         return (
-            <header className="App-header">
+            <header className="header">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <a className="navbar-brand" href="#">
                         Movies app

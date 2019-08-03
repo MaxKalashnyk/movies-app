@@ -1,3 +1,6 @@
+.movies-item {
+    position: relative;
+}
 .genre-item {
     background-color: #ccc;
     display: inline-block;
@@ -6,4 +9,25 @@
     font-size: 0.75em;
     margin-right: 5px;
     margin-bottom: 5px;
+}
+.movie-adult {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+    color: red;
+    background-color: #fff;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+    top: -15px;
+    right: 0;
+}
+.movie-title {
+    display: inline-block;
+}
+.movie-thumb {
+    margin-bottom: 1em;
 }

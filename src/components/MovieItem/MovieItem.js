@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { generateMoviePoster } from "../../utils/constants";
 import { generateID } from "../../utils/constants";
 import { cutString } from "../../utils/constants";
@@ -8,7 +9,6 @@ import "./MovieItem.scss";
 export class MovieItem extends Component {
     getGenresList(list) {
         const { genres } = this.props;
-
         if (genres.genresData) {
             const filteredList = genres.genresData.genres.filter(function(el) {
                 return list.some(function(f) {
@@ -27,6 +27,10 @@ export class MovieItem extends Component {
         ));
     }
 
+    checkMovieForAdult(isAdult) {
+        return isAdult ? <div className="movie-adult">18+</div> : "";
+    }
+
     render() {
         const { content } = this.props;
         const {
@@ -42,6 +46,7 @@ export class MovieItem extends Component {
         } = content;
 
         const getGenresMoviesList = this.getGenresList(genre_ids);
+        const movieLink = `/movie/${id}`;
 
         return (
             <div className="col-lg-3 col-md-6 col-12 movies-item">
@@ -52,7 +57,9 @@ export class MovieItem extends Component {
                         className="img-thumbnail movie-thumb"
                     />
                 </div>
-                <h5 className="movie-title">{title}</h5>
+                <NavLink to={movieLink}>
+                    <h5 className="movie-title">{title}</h5>
+                </NavLink>
                 <div className="movie-info">
                     <p className="movie-info__genres">
                         {this.renderGenresList(getGenresMoviesList)}
@@ -62,13 +69,14 @@ export class MovieItem extends Component {
                     </p>
                     <div className="movie-info__vote">
                         <p>Average rating: {vote_average}</p>
-                        <p>Votes count: {vote_count}</p>
+                        {/* <p>Votes count: {vote_count}</p> */}
                     </div>
                     <p className="movie-info__date">{release_date}</p>
-                    <a className="btn btn-success" href="#">
+                    <NavLink to={movieLink} className="btn btn-success">
                         Link
-                    </a>
+                    </NavLink>
                 </div>
+                {this.checkMovieForAdult(adult)}
             </div>
         );
     }
