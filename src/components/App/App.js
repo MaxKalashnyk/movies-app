@@ -31,7 +31,6 @@ export class App extends Component {
     }
     getGenresListAsync() {
         const { getGenres } = this.props;
-
         return new Promise(resolve => {
             getGenres();
             resolve(true);
@@ -39,10 +38,20 @@ export class App extends Component {
     }
 
     componentDidMount() {
-        const { getMovies } = this.props;
-
-        this.getGenresListAsync().then(getMovies());
+        const { getMovies, page, genres } = this.props;
+        this.getGenresListAsync().then(e => {
+            if (e) {
+                console.log("genres", genres);
+                getMovies(page);
+            }
+        });
     }
+
+    // componentDidUpdate() {
+    //     const { getMovies, page } = this.props;
+    //     console.log("page", page);
+    //     this.getGenresListAsync().then(getMovies(page));
+    // }
 
     render() {
         const { movies, page } = this.props;
@@ -88,10 +97,11 @@ export class App extends Component {
 }
 
 const mapStateToProps = store => {
+    console.log("store", store);
     return {
-        page: store.page,
+        page: store.page.page,
         movies: store.movies,
-        genres: store.genres
+        genres: store.genres.genresData
     };
 };
 

@@ -39,7 +39,7 @@ export class MovieItem extends Component {
             id,
             title,
             vote_average,
-            vote_count,
+            // vote_count,
             release_date,
             overview,
             adult

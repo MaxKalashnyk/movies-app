@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import { store } from "../../store/configureStore";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { setPage } from "../../actions/setPage";
 import "./Pagination.scss";
 
 const LEFT_PAGE = "LEFT";
@@ -21,21 +24,25 @@ class Pagination extends Component {
     constructor(props) {
         super(props);
         const { totalRecords = null, pageNeighbours = 0 } = props;
-
         this.totalRecords = typeof totalRecords === "number" ? totalRecords : 0;
-
         this.pageNeighbours =
             typeof pageNeighbours === "number"
                 ? Math.max(0, Math.min(pageNeighbours, 2))
                 : 0;
 
-        this.totalPages = 996;
-
-        this.state = { currentPage: 1 };
+        this.totalPages = 992;
+        // this.state = { currentPage: 1 };
     }
 
     componentDidMount() {
         this.gotoPage(1);
+    }
+
+    changePage(page) {
+        return new Promise(resolve => {
+            store.dispatch(setPage(page));
+            resolve(true);
+        });
     }
 
     gotoPage = page => {
@@ -49,29 +56,35 @@ class Pagination extends Component {
             totalRecords: this.totalRecords
         };
 
-        this.setState({ currentPage }, () => onPageChanged(paginationData));
+        this.changePage(currentPage).then(e => {
+            if (e) {
+                onPageChanged(paginationData);
+            }
+        });
+
+        // this.setState({ currentPage }, () => onPageChanged(paginationData));
     };
 
     handleClick = (page, evt) => {
         evt.preventDefault();
+        console.log("page", page);
         this.gotoPage(page);
     };
 
     handleMoveLeft = evt => {
         evt.preventDefault();
-        this.gotoPage(this.state.currentPage - this.pageNeighbours * 2 - 1);
+        this.gotoPage(this.props.page - this.pageNeighbours * 2 - 1);
     };
 
     handleMoveRight = evt => {
         evt.preventDefault();
-        this.gotoPage(this.state.currentPage + this.pageNeighbours * 2 + 1);
+        this.gotoPage(this.props.page + this.pageNeighbours * 2 + 1);
     };
 
     fetchPageNumbers = () => {
         const totalPages = this.totalPages;
-        const currentPage = this.state.currentPage;
+        const currentPage = this.props.page;
         const pageNeighbours = this.pageNeighbours;
-
         const totalNumbers = this.pageNeighbours * 2 + 3;
         const totalBlocks = totalNumbers + 2;
 
@@ -121,15 +134,14 @@ class Pagination extends Component {
 
     render() {
         if (!this.totalRecords) return null;
-
         if (this.totalPages === 1) return null;
 
-        const { currentPage } = this.state;
+        const currentPage = this.props.page;
         const pages = this.fetchPageNumbers();
 
         return (
-            <Fragment>
-                <nav aria-label="Countries Pagination">
+            <div className="pagination-wrap">
+                <nav aria-label="Pagination">
                     <ul className="pagination">
                         {pages.map((page, index) => {
                             if (page === LEFT_PAGE)
@@ -189,15 +201,21 @@ class Pagination extends Component {
                         })}
                     </ul>
                 </nav>
-            </Fragment>
+            </div>
         );
     }
 }
+
+const mapStateToProps = store => {
+    return {
+        page: store.page.page
+    };
+};
+
+export default connect(mapStateToProps)(Pagination);
 
 Pagination.propTypes = {
     totalRecords: PropTypes.number.isRequired,
     pageNeighbours: PropTypes.number,
     onPageChanged: PropTypes.func
 };
-
-export default Pagination;

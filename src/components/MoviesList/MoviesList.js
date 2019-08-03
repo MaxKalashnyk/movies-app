@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { store } from "../../store/configureStore";
+import { connect } from "react-redux";
 import { MovieItem } from "../MovieItem";
 import { generateID } from "../../utils/constants";
+import { Pagination } from "../Pagination";
 import "./MoviesList.scss";
 
 export class MoviesList extends Component {
     renderMoviesList(data) {
-        console.log(data);
         if (data) {
             return data.results.map(item => (
                 <MovieItem content={item} key={generateID()}></MovieItem>
@@ -24,6 +26,11 @@ export class MoviesList extends Component {
             return (
                 <div className="row movies-row">
                     {this.renderMoviesList(movies)}
+                    <Pagination
+                        totalRecords={20}
+                        pageNeighbours={1}
+                        onPageChanged={this.onPageChanged}
+                    />
                 </div>
             );
         }
@@ -57,4 +64,10 @@ export class MoviesList extends Component {
     }
 }
 
-export default MoviesList;
+const mapStateToProps = store => {
+    return {
+        page: store.page.page
+    };
+};
+
+export default connect(mapStateToProps)(MoviesList);
