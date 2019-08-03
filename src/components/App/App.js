@@ -37,24 +37,21 @@ export class App extends Component {
         }).catch(error => console.error(error));
     }
 
-    componentDidMount() {
-        const { getMovies, page, genres } = this.props;
+    handleMoviesData() {
+        const { getMovies, page } = this.props;
         this.getGenresListAsync().then(e => {
             if (e) {
-                console.log("genres", genres);
                 getMovies(page);
             }
         });
     }
 
-    // componentDidUpdate() {
-    //     const { getMovies, page } = this.props;
-    //     console.log("page", page);
-    //     this.getGenresListAsync().then(getMovies(page));
-    // }
+    componentDidMount() {
+        this.handleMoviesData();
+    }
 
     render() {
-        const { movies, page } = this.props;
+        const { movies } = this.props;
 
         return (
             <Router>
@@ -71,7 +68,6 @@ export class App extends Component {
                                     <MoviesList
                                         isFetching={movies.isFetching}
                                         movies={movies.moviesData}
-                                        page={page}
                                     />
                                 )}
                                 exact
@@ -97,9 +93,7 @@ export class App extends Component {
 }
 
 const mapStateToProps = store => {
-    console.log("store", store);
     return {
-        page: store.page.page,
         movies: store.movies,
         genres: store.genres.genresData
     };

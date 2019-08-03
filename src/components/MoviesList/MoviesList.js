@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { store } from "../../store/configureStore";
 import { connect } from "react-redux";
 import { MovieItem } from "../MovieItem";
 import { generateID } from "../../utils/constants";
 import { Pagination } from "../Pagination";
+import { getMoviesAction } from "../../actions/getMovies";
+import { getGenresAction } from "../../actions/getGenres";
 import "./MoviesList.scss";
 
 export class MoviesList extends Component {
+    constructor(props) {
+        super(props);
+        this.onPageChanged = this.onPageChanged.bind(this);
+    }
+
     renderMoviesList(data) {
         if (data) {
             return data.results.map(item => (
@@ -15,6 +21,11 @@ export class MoviesList extends Component {
         } else {
             return <div>There are no movies...</div>;
         }
+    }
+
+    onPageChanged() {
+        const { getMovies, page } = this.props;
+        getMovies(page);
     }
 
     renderTemplate() {
@@ -70,4 +81,14 @@ const mapStateToProps = store => {
     };
 };
 
-export default connect(mapStateToProps)(MoviesList);
+const mapDispatchToProps = dispatch => {
+    return {
+        getGenres: () => dispatch(getGenresAction()),
+        getMovies: page => dispatch(getMoviesAction(page))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MoviesList);

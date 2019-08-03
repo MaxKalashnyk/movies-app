@@ -34,9 +34,9 @@ class Pagination extends Component {
         // this.state = { currentPage: 1 };
     }
 
-    componentDidMount() {
-        this.gotoPage(1);
-    }
+    // componentDidMount() {
+    //     this.gotoPage(1);
+    // }
 
     changePage(page) {
         return new Promise(resolve => {
