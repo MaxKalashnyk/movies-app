@@ -1,8 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import "./NotFound.scss";
 
-const NotFound = () => {
-    return <div className=""></div>;
-};
+export class NotFound extends Component {
+    render() {
+        return <div></div>;
+    }
+}
 
 export default NotFound;

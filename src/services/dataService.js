@@ -32,3 +32,11 @@ export const getGenresList = () => {
         .then(response => response.json())
         .catch(error => console.error(error));
 };
+
+export const getMovieById = id => {
+    const urlString = `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKey}&language=${lang}`;
+
+    return fetch(urlString)
+        .then(response => response.json())
+        .catch(error => console.error(error));
+};
