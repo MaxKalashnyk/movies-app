@@ -26,9 +26,9 @@ export class Header extends Component {
         return (
             <header className="header">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <a className="navbar-brand" href="#">
+                    <NavLink to="/" className="navbar-brand">
                         Movies app
-                    </a>
+                    </NavLink>
                     <button
                         className="navbar-toggler"
                         type="button"
