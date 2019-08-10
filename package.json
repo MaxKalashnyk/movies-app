@@ -6,6 +6,7 @@
     "dependencies": {
         "babel-loader": "^8.0.6",
         "bootstrap": "^4.3.1",
+        "gh-pages": "^2.0.1",
         "node-sass": "^4.12.0",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
@@ -44,7 +45,6 @@
     "devDependencies": {
         "eslint-config-prettier": "^5.0.0",
         "eslint-plugin-prettier": "^3.1.0",
-        "gh-pages": "^2.0.1",
         "husky": "^2.4.1",
         "lint-staged": "^8.2.1",
         "prettier": "^1.18.2",
