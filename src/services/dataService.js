@@ -17,8 +17,8 @@ export const getSimilarMovies = (page = 1, movieId) => {
         .catch(error => console.error(error));
 };
 
-export const searchMovies = (page = 1) => {
-    const urlString = `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&language=${lang}&page=${page}&include_adult=false`;
+export const searchMovies = (page = 1, searchPhrase = "") => {
+    const urlString = `https://api.themoviedb.org/3/search/movie?query=${searchPhrase}&page=${page}&language=${lang}&api_key=${APIKey}`;
 
     return fetch(urlString)
         .then(response => response.json())

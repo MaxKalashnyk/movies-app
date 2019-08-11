@@ -30,7 +30,7 @@ class Pagination extends Component {
                 ? Math.max(0, Math.min(pageNeighbours, 2))
                 : 0;
 
-        this.totalPages = 992;
+        this.totalPages = props.totalPages;
         // this.state = { currentPage: 1 };
     }
 
